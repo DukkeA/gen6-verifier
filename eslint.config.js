@@ -10,6 +10,8 @@ export default [
       'no-shadow': 'off',
       '@typescript-eslint/no-shadow': 'off',
     },
-    ignores: ['**/routeTree.gen.ts'],
+  },
+  {
+    ignores: ['**/routeTree.gen.ts', '*.config.js'],
   },
 ]
