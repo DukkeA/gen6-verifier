@@ -6,7 +6,7 @@ To run this application:
 
 ```bash
 npm install
-npm run start
+npm run dev
 ```
 
 # Building For Production
@@ -15,6 +15,7 @@ To build this application for production:
 
 ```bash
 npm run build
+npm run start
 ```
 
 ## Testing

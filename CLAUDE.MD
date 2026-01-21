@@ -76,14 +76,14 @@ gen6-verificator/
 # Install dependencies
 npm install
 
-# Start development server (port 3000)
+# Start development server
 npm run dev
 
 # Build for production
 npm run build
 
 # Preview production build
-npm run preview
+npm run start
 
 # Run tests
 npm run test
