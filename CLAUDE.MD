@@ -20,13 +20,10 @@ gen6-verificator/
 │   ├── routes/              # File-based routing (TanStack Router)
 │   │   ├── __root.tsx      # Root layout with Header and devtools
 │   │   ├── index.tsx       # Home page component
-│   │   └── demo/           # Demo routes for TanStack features
 │   ├── components/         # React components
 │   │   └── Header.tsx      # Main header component
 │   ├── lib/                # Utility libraries
 │   │   ├── utils.ts        # Helper functions (cn, etc.)
-│   │   ├── demo-store.ts   # Demo TanStack Store
-│   │   └── demo-store-devtools.tsx
 │   ├── integrations/       # Third-party integrations
 │   │   └── tanstack-query/ # React Query setup
 │   ├── env.ts              # Environment variables (T3 Env)
@@ -302,3 +299,8 @@ The project uses TanStack ESLint config with custom rules:
 - Use `npm run check` to format and lint code
 - Always use absolute imports with `@/` prefix
 - Check `package.json` overrides before modifying dependency versions
+- Use Zod for form validations
+- Always use Shadcn components if possible
+- Don't use custom colors, use the semantic colors defined in styles.css unless a custom color is needed to express something
+- Don't include unnecessary comments
+- Follow the feature/package folder/files structure
