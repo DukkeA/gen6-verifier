@@ -62,6 +62,14 @@ gen6-verificator/
 - **tw-animate-css**: Animation utilities
 - **lucide-react**: Icon library
 
+### Polkadot Integration
+
+- **@polkadot/api**: Polkadot blockchain API
+- **@polkadot/extension-dapp**: Browser extension integration
+- **@polkadot/react-identicon**: React components for identicons
+- **@polkadot/keyring**: Key management and signing
+- **@polkadot/util-crypto**: Cryptographic utilities
+
 ### Additional Tools
 
 - **Zod 4.1.11**: Schema validation
@@ -69,6 +77,7 @@ gen6-verificator/
 - **ESLint**: Code linting with TanStack config
 - **Prettier**: Code formatting
 - **Vitest**: Unit testing framework
+- **React Hook Form**: Form management with validation
 
 ## Development Commands
 
@@ -234,6 +243,44 @@ These demonstrate TanStack features and can be removed once understood.
 5. **Code Quality**: Run `npm run check` before commits
 6. **Environment Variables**: Use T3 Env, never hardcode secrets
 
+## Configuration Notes
+
+### Package Overrides
+
+The project uses npm overrides to ensure compatibility and security:
+
+```json
+{
+  "overrides": {
+    "@polkadot/util": "^14.0.1",
+    "@polkadot/util-crypto": "^14.0.1",
+    "@polkadot/keyring": "^14.0.1",
+    "seroval": "^1.4.1",
+    "react-copy-to-clipboard": {
+      "react": "^19.2.0"
+    }
+  }
+}
+```
+
+- **Polkadot packages**: Locked to v14.0.1 for consistency across all Polkadot dependencies
+- **seroval**: Forced to v1.4.1+ to fix security vulnerabilities (CVE fixes for RCE, Prototype Pollution, and DoS)
+- **react-copy-to-clipboard**: Override to accept React 19 (used by `@polkadot/react-identicon`)
+
+### ESLint Configuration
+
+The project uses TanStack ESLint config with custom rules:
+
+- JavaScript config files (`*.config.js`) are ignored from TypeScript parsing
+- Generated files (`routeTree.gen.ts`) are completely ignored
+- Disabled rules: `no-unnecessary-condition`, `no-shadow`, `@typescript-eslint/no-shadow`
+
+### TypeScript Configuration
+
+- Includes `.js` config files for IDE support
+- Uses path aliases: `@/*` maps to `./src/*`
+- Strict mode enabled with additional safety checks
+
 ## Resources
 
 - [TanStack Router Docs](https://tanstack.com/router)
@@ -245,11 +292,13 @@ These demonstrate TanStack features and can be removed once understood.
 
 ## Notes for AI Assistants
 
-- This is a fresh TanStack project with demo files
+- This is a Polkadot-integrated TanStack project
 - The app uses file-based routing - routes are in `src/routes/`
 - Styling is Tailwind CSS 4.0 with Shadcn components
 - State management uses TanStack Store
 - Data fetching uses TanStack Query
+- Polkadot integration for blockchain interactions
 - Always maintain TypeScript type safety
 - Use `npm run check` to format and lint code
-- Always use absolut imports
+- Always use absolute imports with `@/` prefix
+- Check `package.json` overrides before modifying dependency versions
