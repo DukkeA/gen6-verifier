@@ -1,4 +1,5 @@
 import { ChevronRight } from 'lucide-react'
+import { Link } from '@tanstack/react-router'
 import type { LucideIcon } from 'lucide-react'
 
 import {
@@ -40,10 +41,10 @@ export function NavMain({
           <Collapsible key={item.title} asChild defaultOpen={item.isActive}>
             <SidebarMenuItem>
               <SidebarMenuButton asChild tooltip={item.title}>
-                <a href={item.url}>
+                <Link to={item.url}>
                   <item.icon />
                   <span>{item.title}</span>
-                </a>
+                </Link>
               </SidebarMenuButton>
               {item.items?.length ? (
                 <>

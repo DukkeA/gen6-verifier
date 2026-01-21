@@ -12,6 +12,7 @@ import {
   SquareTerminal,
 } from 'lucide-react'
 
+import { Link } from '@tanstack/react-router'
 import { NavMain } from '@/components/layout/sidebar/nav-main'
 // import { NavProjects } from '@/components/layout/sidebar/nav-projects'
 import { NavSecondary } from '@/components/layout/sidebar/nav-secondary'
@@ -35,17 +36,17 @@ const data = {
   navMain: [
     {
       title: 'Playground',
-      url: '#',
+      url: '/',
       icon: SquareTerminal,
       isActive: true,
       items: [
         {
           title: 'Real Seal',
-          url: '#',
+          url: '/real-seal',
         },
         {
           title: 'Identity',
-          url: '#',
+          url: '/identity',
         },
       ],
     },
@@ -111,7 +112,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton size="lg" asChild>
-              <a href="#">
+              <Link to="/">
                 <div className="bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square size-8 items-center justify-center rounded-lg">
                   <Command className="size-4" />
                 </div>
@@ -119,7 +120,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                   <span className="truncate font-medium">Gen6</span>
                   <span className="truncate text-xs">Web3 Solutions</span>
                 </div>
-              </a>
+              </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>

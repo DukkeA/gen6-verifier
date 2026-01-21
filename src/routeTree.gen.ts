@@ -10,33 +10,53 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as RealSealIndexRouteImport } from './routes/real-seal/index'
+import { Route as IdentityIndexRouteImport } from './routes/identity/index'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const RealSealIndexRoute = RealSealIndexRouteImport.update({
+  id: '/real-seal/',
+  path: '/real-seal/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const IdentityIndexRoute = IdentityIndexRouteImport.update({
+  id: '/identity/',
+  path: '/identity/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/identity/': typeof IdentityIndexRoute
+  '/real-seal/': typeof RealSealIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/identity': typeof IdentityIndexRoute
+  '/real-seal': typeof RealSealIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/identity/': typeof IdentityIndexRoute
+  '/real-seal/': typeof RealSealIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/identity/' | '/real-seal/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/identity' | '/real-seal'
+  id: '__root__' | '/' | '/identity/' | '/real-seal/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  IdentityIndexRoute: typeof IdentityIndexRoute
+  RealSealIndexRoute: typeof RealSealIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +68,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/real-seal/': {
+      id: '/real-seal/'
+      path: '/real-seal'
+      fullPath: '/real-seal/'
+      preLoaderRoute: typeof RealSealIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/identity/': {
+      id: '/identity/'
+      path: '/identity'
+      fullPath: '/identity/'
+      preLoaderRoute: typeof IdentityIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  IdentityIndexRoute: IdentityIndexRoute,
+  RealSealIndexRoute: RealSealIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
