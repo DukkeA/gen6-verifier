@@ -304,3 +304,4 @@ The project uses TanStack ESLint config with custom rules:
 - Don't use custom colors, use the semantic colors defined in styles.css unless a custom color is needed to express something
 - Don't include unnecessary comments
 - Follow the feature/package folder/files structure
+- Don't use barrel exports
