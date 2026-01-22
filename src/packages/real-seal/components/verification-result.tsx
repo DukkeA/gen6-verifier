@@ -9,12 +9,12 @@ interface VerificationResultProps {
 export function VerificationResultDisplay({ result }: VerificationResultProps) {
   if (result.found) {
     return (
-      <Alert className="border-green-500 bg-green-50 dark:bg-green-950">
-        <CheckCircle2 className="size-4 text-green-600 dark:text-green-400" />
+      <Alert className="border-green-500 bg-green-50 dark:bg-green-500/10">
+        <CheckCircle2 className="size-4 text-green-800! dark:text-green-300" />
         <AlertTitle className="text-green-800 dark:text-green-300">
           Verification Successful
         </AlertTitle>
-        <AlertDescription className="text-green-700 dark:text-green-400">
+        <AlertDescription className="text-green-700 dark:text-green-300">
           <p className="mb-2">{result.message}</p>
           {result.index !== undefined && result.hash && (
             <details className="mt-3">
