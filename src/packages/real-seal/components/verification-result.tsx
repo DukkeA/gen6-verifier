@@ -16,16 +16,22 @@ export function VerificationResultDisplay({ result }: VerificationResultProps) {
         </AlertTitle>
         <AlertDescription className="text-green-700 dark:text-green-400">
           <p className="mb-2">{result.message}</p>
-          {result.index !== undefined && (
-            <p className="text-sm">
-              <span className="font-semibold">Data Point Index:</span>{' '}
-              {result.index}
-            </p>
-          )}
-          {result.hash && (
-            <p className="mt-1 break-all font-mono text-xs">
-              <span className="font-semibold">Hash:</span> {result.hash}
-            </p>
+          {result.index !== undefined && result.hash && (
+            <details className="mt-3">
+              <summary className="cursor-pointer text-sm font-medium hover:underline">
+                View verification details
+              </summary>
+              <div className="mt-2 space-y-1 rounded-md bg-green-100/50 p-2 dark:bg-green-900/20">
+                <p className="text-xs">
+                  <span className="font-semibold">Record ID:</span>{' '}
+                  {result.index}
+                </p>
+                <p className="break-all font-mono text-xs">
+                  <span className="font-semibold">File Fingerprint:</span>{' '}
+                  {result.hash}
+                </p>
+              </div>
+            </details>
           )}
         </AlertDescription>
       </Alert>
