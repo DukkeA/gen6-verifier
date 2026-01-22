@@ -113,9 +113,11 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           <SidebarMenuItem>
             <SidebarMenuButton size="lg" asChild>
               <Link to="/">
-                <div className="bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square size-8 items-center justify-center rounded-lg">
-                  <Command className="size-4" />
-                </div>
+                <img
+                  src="/AppImages/android/android-launchericon-192-192.png"
+                  alt="Gen6 Logo"
+                  className="size-8"
+                />
                 <div className="grid flex-1 text-left text-sm leading-tight">
                   <span className="truncate font-medium">Gen6</span>
                   <span className="truncate text-xs">Web3 Solutions</span>
