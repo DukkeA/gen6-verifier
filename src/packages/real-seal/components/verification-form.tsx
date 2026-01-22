@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
@@ -38,10 +39,16 @@ export function VerificationForm({ hash, onSubmit, isVerifying }: VerificationFo
   const form = useForm<VerificationFormData>({
     resolver: zodResolver(verificationSchema),
     defaultValues: {
-      hash: hash,
+      hash: '',
       address: '',
     },
   })
+
+  useEffect(() => {
+    if (hash) {
+      form.setValue('hash', hash)
+    }
+  }, [hash, form])
 
   return (
     <Card>
@@ -59,10 +66,15 @@ export function VerificationForm({ hash, onSubmit, isVerifying }: VerificationFo
                 <FormItem>
                   <FormLabel>File Hash</FormLabel>
                   <FormControl>
-                    <Input {...field} placeholder="0x..." readOnly className="font-mono" />
+                    <Input
+                      {...field}
+                      placeholder="0x..."
+                      className="font-mono"
+                      disabled={isVerifying}
+                    />
                   </FormControl>
                   <FormDescription>
-                    Blake2 hash of the uploaded file (auto-generated)
+                    Blake2 hash (auto-filled from uploaded file or enter manually)
                   </FormDescription>
                   <FormMessage />
                 </FormItem>
@@ -91,7 +103,7 @@ export function VerificationForm({ hash, onSubmit, isVerifying }: VerificationFo
               )}
             />
 
-            <Button type="submit" className="w-full" disabled={isVerifying || !hash}>
+            <Button type="submit" className="w-full" disabled={isVerifying}>
               {isVerifying ? (
                 <>
                   <Spinner className="mr-2" />

@@ -39,7 +39,13 @@ export function useVerification(): UseVerificationResult {
       }
 
       const projectId = 886
-      const dataPoints = await api.query.dataRegistry.dataPoints(address, projectId)
+      const dataPoints = await api.query.dataRegistry.dataPoints(
+        address,
+        projectId,
+        null,
+      )
+      console.log('Fetched data points:', dataPoints)
+      console.log('Data points to human:', dataPoints.toHuman())
       const dataPointsJson = dataPoints.toJSON() as Array<DataPointTuple>
 
       if (!dataPointsJson || dataPointsJson.length === 0) {
@@ -51,9 +57,11 @@ export function useVerification(): UseVerificationResult {
       }
 
       const normalizedFileHash = hash.toLowerCase()
-      const match = dataPointsJson.find(([[_addr, _projId, _idx], storedHash]) => {
-        return storedHash.toLowerCase() === normalizedFileHash
-      })
+      const match = dataPointsJson.find(
+        ([[_addr, _projId, _idx], storedHash]) => {
+          return storedHash.toLowerCase() === normalizedFileHash
+        },
+      )
 
       if (match) {
         const [[_matchAddr, _matchProjId, matchIdx], matchHash] = match
@@ -70,7 +78,8 @@ export function useVerification(): UseVerificationResult {
         })
       }
     } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : 'Verification failed'
+      const errorMessage =
+        err instanceof Error ? err.message : 'Verification failed'
       setError(errorMessage)
       setResult({
         found: false,
