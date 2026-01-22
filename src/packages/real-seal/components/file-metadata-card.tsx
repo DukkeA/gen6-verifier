@@ -7,7 +7,10 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
-import { formatFileSize, getFileExtension } from '@/packages/real-seal/utils/file-utils'
+import {
+  formatFileSize,
+  getFileExtension,
+} from '@/packages/real-seal/utils/file-utils'
 
 interface FileMetadataCardProps {
   file: File

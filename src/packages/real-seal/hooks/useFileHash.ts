@@ -25,7 +25,8 @@ export function useFileHash(): UseFileHashResult {
       const fileHash = blake2AsHex(uint8Array)
       setHash(fileHash)
     } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : 'Failed to generate hash'
+      const errorMessage =
+        err instanceof Error ? err.message : 'Failed to generate hash'
       setError(errorMessage)
       console.error('Hash generation failed:', err)
     } finally {

@@ -16,7 +16,12 @@ export const Route = createFileRoute('/real-seal/')({
 function RouteComponent() {
   const [file, setFile] = useState<File | null>(null)
   const { hash, isHashing, generateHash, reset: resetHash } = useFileHash()
-  const { result, isVerifying, verify, reset: resetVerification } = useVerification()
+  const {
+    result,
+    isVerifying,
+    verify,
+    reset: resetVerification,
+  } = useVerification()
 
   const handleFileSelect = async (selectedFile: File) => {
     setFile(selectedFile)
