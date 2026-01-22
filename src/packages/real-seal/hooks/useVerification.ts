@@ -29,11 +29,15 @@ export function useVerification(): UseVerificationResult {
 
     try {
       if (!api) {
-        throw new Error('Blockchain API not connected')
+        throw new Error(
+          'Unable to connect to the verification network. Please try again.',
+        )
       }
 
       if (!api.isConnected) {
-        throw new Error('Blockchain connection lost')
+        throw new Error(
+          'Connection to the verification network was lost. Please refresh and try again.',
+        )
       }
 
       const projectId = 886
@@ -46,7 +50,8 @@ export function useVerification(): UseVerificationResult {
       if (!entries || entries.length === 0) {
         setResult({
           found: false,
-          message: 'No data points found for this address',
+          message:
+            'No records found for this user. Please verify the wallet address is correct.',
         })
         return
       }
@@ -73,17 +78,20 @@ export function useVerification(): UseVerificationResult {
           found: true,
           hash: match.hash,
           index: match.index,
-          message: `Hash verified! Found at index ${match.index}`,
+          message: `Document verified successfully! This file is authentic and registered.`,
         })
       } else {
         setResult({
           found: false,
-          message: 'Hash not found in address data points',
+          message:
+            'No matching record found for this file with the provided user. The document authenticity could not be verified.',
         })
       }
     } catch (err) {
       const errorMessage =
-        err instanceof Error ? err.message : 'Verification failed'
+        err instanceof Error
+          ? err.message
+          : 'Verification failed. Please try again or contact support.'
       setError(errorMessage)
       setResult({
         found: false,

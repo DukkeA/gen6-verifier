@@ -19,8 +19,8 @@
   --muted-foreground: oklch(0.5728 0.0371 296.6633);
   --accent: oklch(0.9618 0.0202 295.1913);
   --accent-foreground: oklch(0.3859 0.075 299.6462);
-  --destructive: oklch(0.8403 0.0891 13.066);
-  --destructive-foreground: oklch(0.3564 0.0718 17.5745);
+  --destructive: oklch(44.432% 0.16916 27.689);
+  --destructive-foreground: oklch(0.8403 0.0891 13.066);
   --border: oklch(0.9314 0.0293 303.0703);
   --input: oklch(0.9314 0.0293 303.0703);
   --ring: oklch(0.8824 0.0652 296.7389);
@@ -85,8 +85,8 @@
   --muted-foreground: oklch(0.7125 0.0264 298.4169);
   --accent: oklch(0.2879 0.035 298.6718);
   --accent-foreground: oklch(0.9622 0.0086 308.3618);
-  --destructive: oklch(0.3325 0.0507 20.1158);
-  --destructive-foreground: oklch(0.8403 0.0891 13.066);
+  --destructive: oklch(0.8403 0.0891 13.066);
+  --destructive-foreground: oklch(0.3564 0.0718 17.5745);
   --border: oklch(0.2879 0.035 298.6718);
   --input: oklch(0.2879 0.035 298.6718);
   --ring: oklch(0.8824 0.0652 296.7389);
@@ -208,7 +208,8 @@
   }
 }
 
-::view-transition-old(root), ::view-transition-new(root) {
-    animation: none;
-    mix-blend-mode: normal;
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
 }
