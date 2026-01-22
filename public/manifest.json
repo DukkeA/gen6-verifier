@@ -1,6 +1,6 @@
 {
-  "short_name": "Gen6 Verificator",
-  "name": "Gen6 Verificator",
+  "short_name": "Gen6 Verifier",
+  "name": "Gen6 Verifier",
   "icons": [
     {
       "src": "AppImages/android/android-launchericon-48-48.png",
@@ -41,7 +41,7 @@
   "orientation": "portrait-primary",
   "theme_color": "#000000",
   "background_color": "#000000",
-  "description": "Gen6 Verificator - Verify hashes stored on-chain for Real Seal and Identity",
+  "description": "Gen6 Verifier - Verify hashes stored on-chain for Real Seal and Identity",
   "categories": ["utilities", "blockchain", "security"],
   "lang": "en",
   "dir": "ltr"

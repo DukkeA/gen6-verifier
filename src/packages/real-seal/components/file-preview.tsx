@@ -8,7 +8,7 @@ interface FilePreviewProps {
 }
 
 function ImagePreview({ file }: { file: File }) {
-  const [url, setUrl] = useState<string>('')
+  const [url, setUrl] = useState<string | null>(null)
 
   useEffect(() => {
     const objectUrl = URL.createObjectURL(file)
@@ -18,17 +18,19 @@ function ImagePreview({ file }: { file: File }) {
 
   return (
     <div className="flex items-center justify-center rounded-lg bg-muted p-4">
-      <img
-        src={url}
-        alt={file.name}
-        className="max-h-96 w-full object-contain"
-      />
+      {url && (
+        <img
+          src={url}
+          alt={file.name}
+          className="max-h-96 w-full object-contain"
+        />
+      )}
     </div>
   )
 }
 
 function PDFPreview({ file }: { file: File }) {
-  const [url, setUrl] = useState<string>('')
+  const [url, setUrl] = useState<string | null>(null)
 
   useEffect(() => {
     const objectUrl = URL.createObjectURL(file)
@@ -38,17 +40,19 @@ function PDFPreview({ file }: { file: File }) {
 
   return (
     <div className="flex items-center justify-center rounded-lg bg-muted">
-      <iframe
-        src={url}
-        className="size-full min-h-96 w-full"
-        title={file.name}
-      />
+      {url && (
+        <iframe
+          src={url}
+          className="size-full min-h-96 w-full"
+          title={file.name}
+        />
+      )}
     </div>
   )
 }
 
 function VideoPreview({ file }: { file: File }) {
-  const [url, setUrl] = useState<string>('')
+  const [url, setUrl] = useState<string | null>(null)
 
   useEffect(() => {
     const objectUrl = URL.createObjectURL(file)
@@ -58,15 +62,17 @@ function VideoPreview({ file }: { file: File }) {
 
   return (
     <div className="flex items-center justify-center rounded-lg bg-muted p-4">
-      <video src={url} controls className="max-h-96 w-full">
-        Your browser does not support the video tag.
-      </video>
+      {url && (
+        <video src={url} controls className="max-h-96 w-full">
+          Your browser does not support the video tag.
+        </video>
+      )}
     </div>
   )
 }
 
 function AudioPreview({ file }: { file: File }) {
-  const [url, setUrl] = useState<string>('')
+  const [url, setUrl] = useState<string | null>(null)
 
   useEffect(() => {
     const objectUrl = URL.createObjectURL(file)
@@ -76,9 +82,11 @@ function AudioPreview({ file }: { file: File }) {
 
   return (
     <div className="flex items-center justify-center rounded-lg bg-muted p-8">
-      <audio src={url} controls className="w-full">
-        Your browser does not support the audio tag.
-      </audio>
+      {url && (
+        <audio src={url} controls className="w-full">
+          Your browser does not support the audio tag.
+        </audio>
+      )}
     </div>
   )
 }
