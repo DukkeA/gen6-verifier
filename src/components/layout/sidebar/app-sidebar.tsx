@@ -2,7 +2,7 @@ import * as React from 'react'
 import {
   // BookOpen,
   // Bot,
-  Command,
+  // Command,
   Frame,
   // LifeBuoy,
   Map,
