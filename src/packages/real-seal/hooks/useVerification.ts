@@ -16,8 +16,6 @@ interface UseVerificationResult {
   reset: () => void
 }
 
-type DataPointTuple = [[string, number, number], string]
-
 export function useVerification(): UseVerificationResult {
   const { api } = useGen6()
   const [result, setResult] = useState<VerificationResult | null>(null)
@@ -39,16 +37,13 @@ export function useVerification(): UseVerificationResult {
       }
 
       const projectId = 886
-      const dataPoints = await api.query.dataRegistry.dataPoints(
+      // Use .entries() to get all data points for this address and projectId
+      const entries = await api.query.dataRegistry.dataPoints.entries(
         address,
         projectId,
-        null,
       )
-      console.log('Fetched data points:', dataPoints)
-      console.log('Data points to human:', dataPoints.toHuman())
-      const dataPointsJson = dataPoints.toJSON() as Array<DataPointTuple>
 
-      if (!dataPointsJson || dataPointsJson.length === 0) {
+      if (!entries || entries.length === 0) {
         setResult({
           found: false,
           message: 'No data points found for this address',
@@ -56,20 +51,29 @@ export function useVerification(): UseVerificationResult {
         return
       }
 
+      // Parse entries: each entry is [StorageKey, Codec]
+      const dataPointsArray = entries.map(([key, value]) => {
+        const keyArgs = key.args // [address, projectId, index]
+        const hash = value.toHex() // The stored hash
+        return {
+          address: keyArgs[0].toString(),
+          projectId: Number(keyArgs[1].toString()),
+          index: Number(keyArgs[2].toString()),
+          hash: hash,
+        }
+      })
+
       const normalizedFileHash = hash.toLowerCase()
-      const match = dataPointsJson.find(
-        ([[_addr, _projId, _idx], storedHash]) => {
-          return storedHash.toLowerCase() === normalizedFileHash
-        },
+      const match = dataPointsArray.find(
+        (dataPoint) => dataPoint.hash.toLowerCase() === normalizedFileHash,
       )
 
       if (match) {
-        const [[_matchAddr, _matchProjId, matchIdx], matchHash] = match
         setResult({
           found: true,
-          hash: matchHash,
-          index: matchIdx,
-          message: `Hash verified! Found at index ${matchIdx}`,
+          hash: match.hash,
+          index: match.index,
+          message: `Hash verified! Found at index ${match.index}`,
         })
       } else {
         setResult({
