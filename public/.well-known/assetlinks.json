@@ -1,0 +1,8 @@
+[{
+      "relation": ["delegate_permission/common.handle_all_urls"],
+      "target": {
+        "namespace": "android_app",
+        "package_name": "com.andres_duque.gen6_verifier.twa",
+        "sha256_cert_fingerprints": ["F9:55:DE:A6:CB:03:E8:1D:65:93:13:62:EA:1D:DB:22:9D:8A:97:B8:87:70:B3:10:90:4F:99:08:11:36:E9:9E"]
+      }
+    }]
