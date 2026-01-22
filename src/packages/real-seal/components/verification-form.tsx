@@ -3,7 +3,13 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card'
 import {
   Form,
   FormControl,
@@ -35,7 +41,11 @@ interface VerificationFormProps {
   isVerifying?: boolean
 }
 
-export function VerificationForm({ hash, onSubmit, isVerifying }: VerificationFormProps) {
+export function VerificationForm({
+  hash,
+  onSubmit,
+  isVerifying,
+}: VerificationFormProps) {
   const form = useForm<VerificationFormData>({
     resolver: zodResolver(verificationSchema),
     defaultValues: {
@@ -54,7 +64,9 @@ export function VerificationForm({ hash, onSubmit, isVerifying }: VerificationFo
     <Card>
       <CardHeader>
         <CardTitle>Verification</CardTitle>
-        <CardDescription>Verify the file hash against blockchain data</CardDescription>
+        <CardDescription>
+          Verify the file hash against blockchain data
+        </CardDescription>
       </CardHeader>
       <CardContent>
         <Form {...form}>
@@ -74,7 +86,8 @@ export function VerificationForm({ hash, onSubmit, isVerifying }: VerificationFo
                     />
                   </FormControl>
                   <FormDescription>
-                    Blake2 hash (auto-filled from uploaded file or enter manually)
+                    Blake2 hash (auto-filled from uploaded file or enter
+                    manually)
                   </FormDescription>
                   <FormMessage />
                 </FormItem>
