@@ -9,8 +9,25 @@ interface AnimatedThemeTogglerProps {
 export const AnimatedThemeToggler = ({
   duration = 400,
 }: AnimatedThemeTogglerProps) => {
-  const [isDark, setIsDark] = useState(false)
+  const [isDark, setIsDark] = useState(() => {
+    // Initialize from localStorage or system preference
+    const savedTheme = localStorage.getItem('theme')
+    if (savedTheme) {
+      return savedTheme === 'dark'
+    }
+    return window.matchMedia('(prefers-color-scheme: dark)').matches
+  })
   const buttonRef = useRef<HTMLButtonElement>(null)
+
+  useEffect(() => {
+    // Apply initial theme to document
+    const savedTheme = localStorage.getItem('theme')
+    if (savedTheme) {
+      document.documentElement.classList.toggle('dark', savedTheme === 'dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      document.documentElement.classList.add('dark')
+    }
+  }, [])
 
   useEffect(() => {
     const updateTheme = () => {

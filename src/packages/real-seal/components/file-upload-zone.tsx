@@ -103,7 +103,7 @@ export function FileUploadZone({
             Select File
           </Button>
           <p className="mt-4 text-xs text-muted-foreground">
-            Maximum file size: 50MB
+            Maximum file size: 20MB
           </p>
         </div>
 

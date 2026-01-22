@@ -1,7 +1,13 @@
 export const FILE_CONSTRAINTS = {
-  maxSize: 50 * 1024 * 1024,
+  maxSize: 20 * 1024 * 1024,
   supportedPreviewTypes: {
-    images: ['image/jpeg', 'image/png', 'image/gif', 'image/webp', 'image/svg+xml'],
+    images: [
+      'image/jpeg',
+      'image/png',
+      'image/gif',
+      'image/webp',
+      'image/svg+xml',
+    ],
     documents: ['application/pdf'],
     video: ['video/mp4', 'video/webm', 'video/ogg'],
     audio: ['audio/mpeg', 'audio/wav', 'audio/ogg', 'audio/mp3'],

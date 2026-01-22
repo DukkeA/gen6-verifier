@@ -1,4 +1,4 @@
-import { createFileRoute } from '@tanstack/react-router'
+import { Link, createFileRoute } from '@tanstack/react-router'
 import { Construction } from 'lucide-react'
 import {
   Empty,
@@ -30,9 +30,9 @@ function RouteComponent() {
         <EmptyContent>
           <p className="text-muted-foreground text-xs">
             In the meantime, you can explore{' '}
-            <a href="/real-seal" className="font-medium">
+            <Link to="/real-seal" className="font-medium">
               Real Seal
-            </a>{' '}
+            </Link>{' '}
             functionality to verify documents.
           </p>
         </EmptyContent>

@@ -4,10 +4,10 @@ import {
   // Bot,
   Command,
   Frame,
-  LifeBuoy,
+  // LifeBuoy,
   Map,
   PieChart,
-  Send,
+  // Send,
   // Settings2,
   SquareTerminal,
 } from 'lucide-react'
@@ -75,16 +75,16 @@ const data = {
     // },
   ],
   navSecondary: [
-    {
-      title: 'Support',
-      url: '#',
-      icon: LifeBuoy,
-    },
-    {
-      title: 'Feedback',
-      url: '#',
-      icon: Send,
-    },
+    // {
+    //   title: 'Support',
+    //   url: '#',
+    //   icon: LifeBuoy,
+    // },
+    // {
+    //   title: 'Feedback',
+    //   url: '#',
+    //   icon: Send,
+    // },
   ],
   projects: [
     {
