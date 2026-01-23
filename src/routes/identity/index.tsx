@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useCallback } from 'react'
 import { createFileRoute } from '@tanstack/react-router'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
@@ -65,9 +65,9 @@ function RouteComponent() {
     },
   })
 
-  const handleFormChange = (data: IdentityFormData) => {
+  const handleFormChange = useCallback((data: IdentityFormData) => {
     setCurrentFormData(data)
-  }
+  }, [])
 
   const handleDataLoaded = (data: ParsedIdentityData) => {
     setLoadedFormData(data.formData)
