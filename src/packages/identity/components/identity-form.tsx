@@ -233,7 +233,7 @@ export function IdentityForm({ onFormChange }: IdentityFormProps) {
             )}
           />
 
-          <FormField
+          {/* <FormField
             control={form.control}
             name="profileType"
             render={({ field }) => (
@@ -248,7 +248,7 @@ export function IdentityForm({ onFormChange }: IdentityFormProps) {
                 <FormMessage />
               </FormItem>
             )}
-          />
+          /> */}
         </div>
 
         <div className="space-y-4">

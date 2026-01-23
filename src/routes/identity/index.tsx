@@ -79,7 +79,7 @@ function RouteComponent() {
   }
 
   return (
-    <div className="container mx-auto p-6">
+    <div className="container mx-auto py-12">
       <div className="mb-6">
         <h1 className="text-3xl font-bold">Identity Verification</h1>
         <p className="mt-2 text-muted-foreground">
@@ -173,17 +173,17 @@ function RouteComponent() {
                       name="address"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Wallet Address</FormLabel>
+                          <FormLabel>Gen6 Address</FormLabel>
                           <FormControl>
                             <Input
-                              placeholder="5FHneW46xGXgs5mUiveU4sbTyGBzmstUspZC92UhjJM694ty"
+                              placeholder="g6C5XMbPAFmYEF7y9t8xkKgMch8jdfVheZSSJaBL5S6GoUNos"
                               className="font-mono"
                               disabled={isVerifying}
                               {...field}
                             />
                           </FormControl>
                           <FormDescription>
-                            Polkadot wallet address to check identity
+                            Gen6 adddress to check identity
                           </FormDescription>
                           <FormMessage />
                         </FormItem>
