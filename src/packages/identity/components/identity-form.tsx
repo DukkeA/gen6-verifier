@@ -63,9 +63,10 @@ const formSchema = z.object({
 
 interface IdentityFormProps {
   onFormChange?: (data: IdentityFormData) => void
+  initialData?: IdentityFormData | null
 }
 
-export function IdentityForm({ onFormChange }: IdentityFormProps) {
+export function IdentityForm({ onFormChange, initialData }: IdentityFormProps) {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -88,8 +89,31 @@ export function IdentityForm({ onFormChange }: IdentityFormProps) {
     },
   })
 
-  const { watch } = form
+  const { watch, reset } = form
   const watchedValues = watch()
+
+  React.useEffect(() => {
+    if (initialData) {
+      reset({
+        name: initialData.name,
+        bio: initialData.bio || '',
+        email: initialData.email || '',
+        location: initialData.location,
+        website: initialData.website || '',
+        telegram: initialData.telegram || '',
+        x: initialData.x || '',
+        linkedin: initialData.linkedin || '',
+        github: initialData.github || '',
+        mastodon: initialData.mastodon || '',
+        instagram: initialData.instagram || '',
+        youtube: initialData.youtube || '',
+        profileType: initialData.profileType || '',
+        expertise: initialData.expertise,
+        interests: initialData.interests,
+        customFields: initialData.customFields,
+      })
+    }
+  }, [initialData, reset])
 
   React.useEffect(() => {
     if (onFormChange) {
@@ -262,7 +286,7 @@ export function IdentityForm({ onFormChange }: IdentityFormProps) {
                 <FormItem>
                   <FormLabel>GitHub</FormLabel>
                   <FormControl>
-                    <Input placeholder="username" {...field} />
+                    <Input placeholder="https://github.com/username" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -276,7 +300,7 @@ export function IdentityForm({ onFormChange }: IdentityFormProps) {
                 <FormItem>
                   <FormLabel>X (Twitter)</FormLabel>
                   <FormControl>
-                    <Input placeholder="@username" {...field} />
+                    <Input placeholder="https://x.com/username" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -290,7 +314,7 @@ export function IdentityForm({ onFormChange }: IdentityFormProps) {
                 <FormItem>
                   <FormLabel>LinkedIn</FormLabel>
                   <FormControl>
-                    <Input placeholder="username" {...field} />
+                    <Input placeholder="https://linkedin.com/in/username" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -304,7 +328,7 @@ export function IdentityForm({ onFormChange }: IdentityFormProps) {
                 <FormItem>
                   <FormLabel>Telegram</FormLabel>
                   <FormControl>
-                    <Input placeholder="@username" {...field} />
+                    <Input placeholder="https://t.me/username" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -318,7 +342,7 @@ export function IdentityForm({ onFormChange }: IdentityFormProps) {
                 <FormItem>
                   <FormLabel>Mastodon</FormLabel>
                   <FormControl>
-                    <Input placeholder="@username@instance" {...field} />
+                    <Input placeholder="https://mastodon.social/@username" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -332,7 +356,7 @@ export function IdentityForm({ onFormChange }: IdentityFormProps) {
                 <FormItem>
                   <FormLabel>Instagram</FormLabel>
                   <FormControl>
-                    <Input placeholder="username" {...field} />
+                    <Input placeholder="https://instagram.com/username" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -346,7 +370,7 @@ export function IdentityForm({ onFormChange }: IdentityFormProps) {
                 <FormItem>
                   <FormLabel>YouTube</FormLabel>
                   <FormControl>
-                    <Input placeholder="channel" {...field} />
+                    <Input placeholder="https://www.youtube.com/@username" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>

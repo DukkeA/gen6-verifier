@@ -1,0 +1,27 @@
+{
+  "name": "Alice Developer",
+  "bio": "Full-stack blockchain developer passionate about Web3",
+  "email": "alice@example.com",
+  "location": {
+    "country": "United States",
+    "state": "California"
+  },
+  "website": "https://alice.dev",
+  "github": "alice",
+  "x": "@alice_dev",
+  "linkedin": "alice-developer",
+  "telegram": "@alice",
+  "expertise": ["Rust", "Substrate", "Smart Contracts"],
+  "interests": ["DeFi", "NFTs", "DAOs"],
+  "customFields": [
+    {
+      "key": "role",
+      "value": "Lead Developer"
+    },
+    {
+      "key": "company",
+      "value": "Web3 Labs"
+    }
+  ],
+  "address": "g6C5XMbPAFmYEF7y9t8xkKgMch8jdfVheZSSJaBL5S6GoUNos"
+}

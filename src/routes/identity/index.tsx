@@ -4,6 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import * as z from 'zod'
 import type { IdentityFormData } from '@/packages/identity/types'
+import type { ParsedIdentityData } from '@/packages/identity/utils/json-parser'
 import {
   Card,
   CardContent,
@@ -26,6 +27,7 @@ import {
 import { IdentityForm } from '@/packages/identity/components/identity-form'
 import { VerificationResultDisplay } from '@/packages/identity/components/verification-result'
 import { IdentitySummaryCard } from '@/packages/identity/components/identity-summary-card'
+import { IdentityDataLoader } from '@/packages/identity/components/identity-data-loader'
 import { useIdentityHash } from '@/packages/identity/hooks/useIdentityHash'
 import { useIdentityVerification } from '@/packages/identity/hooks/useIdentityVerification'
 
@@ -50,6 +52,9 @@ function RouteComponent() {
     useState<IdentityFormData | null>(null)
   const [verifiedIdentity, setVerifiedIdentity] =
     useState<IdentityFormData | null>(null)
+  const [loadedFormData, setLoadedFormData] = useState<IdentityFormData | null>(
+    null,
+  )
   const { hash, isCalculating } = useIdentityHash(identityData)
   const { verify, isVerifying, result } = useIdentityVerification()
 
@@ -62,6 +67,14 @@ function RouteComponent() {
 
   const handleFormChange = (data: IdentityFormData) => {
     setCurrentFormData(data)
+  }
+
+  const handleDataLoaded = (data: ParsedIdentityData) => {
+    setLoadedFormData(data.formData)
+    setCurrentFormData(data.formData)
+    if (data.address) {
+      form.setValue('address', data.address)
+    }
   }
 
   const handleGenerateHash = () => {
@@ -90,6 +103,11 @@ function RouteComponent() {
 
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
         <div className="flex flex-col gap-6">
+          <IdentityDataLoader
+            onDataLoaded={handleDataLoaded}
+            disabled={isCalculating || isVerifying}
+          />
+
           <Card>
             <CardHeader>
               <CardTitle>Identity Information</CardTitle>
@@ -98,7 +116,10 @@ function RouteComponent() {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <IdentityForm onFormChange={handleFormChange} />
+              <IdentityForm
+                onFormChange={handleFormChange}
+                initialData={loadedFormData}
+              />
             </CardContent>
           </Card>
         </div>
@@ -183,7 +204,7 @@ function RouteComponent() {
                             />
                           </FormControl>
                           <FormDescription>
-                            Gen6 adddress to check identity
+                            Gen6 address to check identity
                           </FormDescription>
                           <FormMessage />
                         </FormItem>
