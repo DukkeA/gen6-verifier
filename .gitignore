@@ -8,3 +8,6 @@ count.txt
 .nitro
 .tanstack
 .wrangler
+generate-qr.cjs
+.agents
+.claude
