@@ -115,7 +115,7 @@ export function IdentityForm({ onFormChange, initialData }: IdentityFormProps) {
     }
   }, [initialData, reset])
 
-  const watchedValuesRef = React.useRef<string>()
+  const watchedValuesRef = React.useRef<string>('')
 
   React.useEffect(() => {
     if (onFormChange) {
