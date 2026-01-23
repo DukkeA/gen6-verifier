@@ -91,6 +91,12 @@ export function QRCameraScanner({
     setIsScanning(true)
 
     try {
+      if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+        throw new Error(
+          'Camera access requires HTTPS. Please access this site via HTTPS or localhost.',
+        )
+      }
+
       const stream = await navigator.mediaDevices.getUserMedia({
         video: { facingMode: 'environment' },
       })
