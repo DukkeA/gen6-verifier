@@ -27,6 +27,7 @@ export function QRCameraScanner({
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const streamRef = useRef<MediaStream | null>(null)
   const animationFrameRef = useRef<number | null>(null)
+  const isInitializingRef = useRef(false)
 
   const stopCamera = () => {
     if (animationFrameRef.current) {
@@ -42,6 +43,8 @@ export function QRCameraScanner({
     if (videoRef.current) {
       videoRef.current.srcObject = null
     }
+
+    isInitializingRef.current = false
   }
 
   const scanQRCode = () => {
@@ -87,29 +90,85 @@ export function QRCameraScanner({
   }
 
   const startCamera = async () => {
-    setError(null)
-    setIsScanning(true)
+    if (isInitializingRef.current || streamRef.current) {
+      return
+    }
+
+    isInitializingRef.current = true
 
     try {
-      const stream = await navigator.mediaDevices.getUserMedia({
-        video: { facingMode: 'environment' },
-      })
+      if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+        throw new Error(
+          'Camera access requires HTTPS. Please access this site via HTTPS or localhost.',
+        )
+      }
 
+      const constraints = {
+        video: {
+          facingMode: 'environment',
+          width: { ideal: 1280 },
+          height: { ideal: 720 },
+        },
+      }
+
+      const stream = await navigator.mediaDevices.getUserMedia(constraints)
       streamRef.current = stream
 
       if (videoRef.current) {
         videoRef.current.srcObject = stream
-        videoRef.current.play()
+
+        await new Promise<void>((resolve, reject) => {
+          if (!videoRef.current) {
+            reject(new Error('Video element not found'))
+            return
+          }
+
+          videoRef.current.onloadedmetadata = () => {
+            if (videoRef.current) {
+              videoRef.current
+                .play()
+                .then(() => resolve())
+                .catch(reject)
+            }
+          }
+
+          videoRef.current.onerror = () => {
+            reject(new Error('Failed to load video'))
+          }
+        })
+
         animationFrameRef.current = requestAnimationFrame(scanQRCode)
       }
     } catch (err) {
-      setError(
-        err instanceof Error
-          ? `Camera access denied: ${err.message}`
-          : 'Failed to access camera',
-      )
+      const errorMessage =
+        err instanceof Error ? err.message : 'Failed to access camera'
+
+      let userFriendlyMessage = errorMessage
+
+      if (errorMessage.includes('NotAllowedError')) {
+        userFriendlyMessage =
+          'Camera permission denied. Please allow camera access in your browser settings.'
+      } else if (errorMessage.includes('NotFoundError')) {
+        userFriendlyMessage = 'No camera found on this device.'
+      } else if (errorMessage.includes('NotReadableError')) {
+        userFriendlyMessage =
+          'Camera is already in use by another application.'
+      } else if (errorMessage.includes('OverconstrainedError')) {
+        userFriendlyMessage =
+          'Camera does not support the required settings. Try using a different camera.'
+      }
+
+      setError(userFriendlyMessage)
+      stopCamera()
       setIsScanning(false)
+    } finally {
+      isInitializingRef.current = false
     }
+  }
+
+  const handleOpenCamera = () => {
+    setError(null)
+    setIsScanning(true)
   }
 
   const handleClose = () => {
@@ -117,6 +176,14 @@ export function QRCameraScanner({
     setIsScanning(false)
     setError(null)
   }
+
+  useEffect(() => {
+    if (isScanning) {
+      startCamera()
+    } else {
+      stopCamera()
+    }
+  }, [isScanning])
 
   useEffect(() => {
     return () => {
@@ -129,7 +196,7 @@ export function QRCameraScanner({
       <Button
         type="button"
         variant="outline"
-        onClick={startCamera}
+        onClick={handleOpenCamera}
         disabled={disabled || isScanning}
         className="w-full"
       >
