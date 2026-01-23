@@ -204,7 +204,7 @@ function RouteComponent() {
                             />
                           </FormControl>
                           <FormDescription>
-                            Gen6 adddress to check identity
+                            Gen6 address to check identity
                           </FormDescription>
                           <FormMessage />
                         </FormItem>

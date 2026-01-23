@@ -286,7 +286,7 @@ export function IdentityForm({ onFormChange, initialData }: IdentityFormProps) {
                 <FormItem>
                   <FormLabel>GitHub</FormLabel>
                   <FormControl>
-                    <Input placeholder="username" {...field} />
+                    <Input placeholder="https://github.com/username" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -300,7 +300,7 @@ export function IdentityForm({ onFormChange, initialData }: IdentityFormProps) {
                 <FormItem>
                   <FormLabel>X (Twitter)</FormLabel>
                   <FormControl>
-                    <Input placeholder="@username" {...field} />
+                    <Input placeholder="https://x.com/username" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -314,7 +314,7 @@ export function IdentityForm({ onFormChange, initialData }: IdentityFormProps) {
                 <FormItem>
                   <FormLabel>LinkedIn</FormLabel>
                   <FormControl>
-                    <Input placeholder="username" {...field} />
+                    <Input placeholder="https://linkedin.com/in/username" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -328,7 +328,7 @@ export function IdentityForm({ onFormChange, initialData }: IdentityFormProps) {
                 <FormItem>
                   <FormLabel>Telegram</FormLabel>
                   <FormControl>
-                    <Input placeholder="@username" {...field} />
+                    <Input placeholder="https://t.me/username" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -342,7 +342,7 @@ export function IdentityForm({ onFormChange, initialData }: IdentityFormProps) {
                 <FormItem>
                   <FormLabel>Mastodon</FormLabel>
                   <FormControl>
-                    <Input placeholder="@username@instance" {...field} />
+                    <Input placeholder="https://mastodon.social/@username" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -356,7 +356,7 @@ export function IdentityForm({ onFormChange, initialData }: IdentityFormProps) {
                 <FormItem>
                   <FormLabel>Instagram</FormLabel>
                   <FormControl>
-                    <Input placeholder="username" {...field} />
+                    <Input placeholder="https://instagram.com/username" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -370,7 +370,7 @@ export function IdentityForm({ onFormChange, initialData }: IdentityFormProps) {
                 <FormItem>
                   <FormLabel>YouTube</FormLabel>
                   <FormControl>
-                    <Input placeholder="channel" {...field} />
+                    <Input placeholder="https://www.youtube.com/@username" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
