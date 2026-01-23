@@ -305,3 +305,4 @@ The project uses TanStack ESLint config with custom rules:
 - Don't include unnecessary comments
 - Follow the feature/package folder/files structure
 - Don't use barrel exports
+- Always write in english

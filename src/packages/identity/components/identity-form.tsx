@@ -63,9 +63,10 @@ const formSchema = z.object({
 
 interface IdentityFormProps {
   onFormChange?: (data: IdentityFormData) => void
+  initialData?: IdentityFormData | null
 }
 
-export function IdentityForm({ onFormChange }: IdentityFormProps) {
+export function IdentityForm({ onFormChange, initialData }: IdentityFormProps) {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -88,8 +89,31 @@ export function IdentityForm({ onFormChange }: IdentityFormProps) {
     },
   })
 
-  const { watch } = form
+  const { watch, reset } = form
   const watchedValues = watch()
+
+  React.useEffect(() => {
+    if (initialData) {
+      reset({
+        name: initialData.name,
+        bio: initialData.bio || '',
+        email: initialData.email || '',
+        location: initialData.location,
+        website: initialData.website || '',
+        telegram: initialData.telegram || '',
+        x: initialData.x || '',
+        linkedin: initialData.linkedin || '',
+        github: initialData.github || '',
+        mastodon: initialData.mastodon || '',
+        instagram: initialData.instagram || '',
+        youtube: initialData.youtube || '',
+        profileType: initialData.profileType || '',
+        expertise: initialData.expertise,
+        interests: initialData.interests,
+        customFields: initialData.customFields,
+      })
+    }
+  }, [initialData, reset])
 
   React.useEffect(() => {
     if (onFormChange) {
